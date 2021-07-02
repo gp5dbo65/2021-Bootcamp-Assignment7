@@ -1,5 +1,8 @@
 package com.coderscampus.arraylist;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class Assignment7App {
@@ -40,6 +43,35 @@ public class Assignment7App {
 		}
 		System.out.println("------------");
 
+		speedTest();
+
 	} //end of main
+
+	public static void speedTest() {
+		Date startTime = new Date();
+		
+		List<Integer> arrayListNumbers = new ArrayList<>();
+		
+		for (int i = 0; i < 100000000; i++) {
+			arrayListNumbers.add(i);
+		}
+		
+		Date endTime = new Date();
+		System.out.println("ARRAYLIST: The time it took to add numbers is: "
+			+ (endTime.getTime() - startTime.getTime()) + " milliseconds");
+		
+		Date startTimeCustomList = new Date();
+		
+		CustomList<Integer> customListNumbers = new CustomArrayList<>();
+		
+		for (int i = 0; i < 100000000; i++) {
+			customListNumbers.add(i);
+		}
+		
+		Date endTimeCustomList = new Date();
+		System.out.println("CUSTOM ARRAY LIST: The time it took to add numbers is: "
+			+ (endTimeCustomList.getTime() - startTimeCustomList.getTime()) + " milliseconds");
+		
+	} //end of speedTest method
 
 } //end of Assignment5App class
