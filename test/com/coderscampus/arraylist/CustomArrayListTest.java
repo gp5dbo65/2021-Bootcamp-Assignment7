@@ -1,8 +1,6 @@
 package com.coderscampus.arraylist;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-//import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CustomArrayListTest {
@@ -11,8 +9,7 @@ class CustomArrayListTest {
 	// Step 2 - Write the business logic to make test succeed
 	// Step 3 - Refactor your code
 	
-//	@BeforeEach
-	
+
 	@Test
 	void should_add_one_item_to_list() {
 		// Three A's
