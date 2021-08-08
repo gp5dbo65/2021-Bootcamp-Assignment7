@@ -35,5 +35,54 @@ public class CustomArrayList<T> implements CustomList<T> {
 		}
 		return (T) items[index];
 	} //end of get method
+
+	@Override
+	public boolean add(int index, T item) throws IndexOutOfBoundsException {
+		// 1) compare index to current array to see if it is out of bounds
+		if (index > size) {
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+		}
+		 
+		// 2a) do we need to expand the array? yes, invoke expand method
+		if (size == items.length) {
+			expandArray();
+		}
+			
+		// 2b) are we at the end? yes, invoke the add method
+		if (index == size) {
+			return add(item);
+		}
+		
+		// 2c) invoke method to shift arrays elements to the right of index by 1.
+		for (int i = size-1; i > index; i--) {
+			items[i+1] = items[i];
+		}
+		if (size == 1) {
+			items[1] = items[0];
+		}
+		items[index] = item;
+		
+		// 3) insert item T into index (int) and increment size
+		size++;
+		
+		// 4) return true
+		return true;
+	}
+
+	@Override
+	public T remove(int index) throws IndexOutOfBoundsException {
+		// TODO Auto-generated method stub
+		/*
+		 * 1) compare index to current array size to see if it is out of bounds.
+		 *    yes - throw IndexOutOfBoundsException - terminate program
+		 * 2a) copy contents @ [index] into a temp variable
+		 * 2b) are we at the end? yes - set the last entry to NULL,
+		 * 		 return the contents of temp var
+		 * 2c) invoke method to shift array data to the left by 1.
+		 * 3) decrement array size by 1
+		 * 4) return item T stored in temp var  
+		 * */
+		return null;
+	}
 	
 } //end of CustomArrayList class
