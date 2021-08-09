@@ -50,57 +50,145 @@ class CustomArrayListTest {
 	} // end of should_add_11_itmes_to_list method
 	
 	@Test
-	void add_item_to_front_of_empty_list() {
+	void should_add_item_to_front_of_empty_list() {
 		// Arrange stage
 		CustomList<Integer> sut = new CustomArrayList<>();
+		assertEquals(null, sut.get(0));
+		assertEquals(0, sut.getSize());
 		
 		// Act stage
 		sut.add(0, 100);
 		
 		// Assert stage
 		assertEquals(100, sut.get(0));
-		assertEquals(1, sut.getSize());
-	}
+		assertEquals(null, sut.get(1));
+		assertEquals(1, sut.getSize());		
+	} //end of should_add_item_to_front_of_empty_list
 	
 	@Test
-	void add_item_to_front_of_list() {
+	void should_add_item_to_front_of_list() {
 		// Arrange stage
 		CustomList<Integer> sut = new CustomArrayList<>();
-		
-		// Act stage
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 11; i++) {
 			sut.add(i);
 		}
+		assertEquals(0, sut.get(0));
+		assertEquals(1, sut.get(1));
+		assertEquals(2, sut.get(2));
+		assertEquals(3, sut.get(3));
+		assertEquals(4, sut.get(4));
+		assertEquals(5, sut.get(5));
+		assertEquals(6, sut.get(6));
+		assertEquals(7, sut.get(7));
+		assertEquals(8, sut.get(8));
+		assertEquals(9, sut.get(9));
+		assertEquals(10, sut.get(10));
+		assertEquals(null, sut.get(11));
+		assertEquals(11, sut.getSize());
+		
+		// Act stage
 		sut.add(0, 100);
 		
 		// Assert stage
 		assertEquals(100, sut.get(0));
-		assertEquals(1, sut.getSize());
-	}
-	@Test
-	void add_item_to_middle_of_list() {
-		
-	}
+		assertEquals(0, sut.get(1));
+		assertEquals(1, sut.get(2));
+		assertEquals(2, sut.get(3));
+		assertEquals(3, sut.get(4));
+		assertEquals(4, sut.get(5));
+		assertEquals(5, sut.get(6));
+		assertEquals(6, sut.get(7));
+		assertEquals(7, sut.get(8));
+		assertEquals(8, sut.get(9));
+		assertEquals(9, sut.get(10));
+		assertEquals(10, sut.get(11));
+		assertEquals(null, sut.get(12));
+		assertEquals(12, sut.getSize());
+	} //end of should_add_item_to_front_of_list
 	
 	@Test
-	void add_item_to_end_of_list() {
+	void should_add_item_to_middle_of_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for(int i = 0; i < 11; i++) {
+			sut.add(i);
+		}
 		
-	}
+		// Act stage
+		sut.add(7, 100);
+		
+		// Assert stage
+		assertEquals(6, sut.get(6));
+		assertEquals(100, sut.get(7));
+		assertEquals(7, sut.get(8));
+		assertEquals(8, sut.get(9));
+		assertEquals(9, sut.get(10));
+		assertEquals(10, sut.get(11));
+		assertEquals(null, sut.get(12));
+		assertEquals(12, sut.getSize());
+	} //end of should_add_item_to_middle_of_list
 	
 	@Test
-	void remove_first_item_from_list() {
+	void should_add_item_to_end_of_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for(int i = 0; i < 10; i++) {
+			sut.add(i);
+		}
 		
-	}
+		// Act stage
+		sut.add(10, 100);
+		
+		// Assert stage
+		assertEquals(9, sut.get(9));
+		assertEquals(100, sut.get(10));
+		assertEquals(null, sut.get(11));
+		assertEquals(11, sut.getSize());
+	} //end of should_add_item_to_end_of_list
+	
+	@Test
+	void should_add_items_to_large_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for(int i = 0; i < 5000; i++) {
+			sut.add(i);
+		}
+		assertEquals(4999, sut.get(4999));
+		assertEquals(null, sut.get(5000));
+		assertEquals(5000, sut.getSize());
+		
+		// Act stage
+		sut.add(0, -9999);		//add to front of list
+		sut.add(2500, 5555);	//add to middle of list
+		sut.add(5002, 9999);	//add to end of list
+		
+		// Assert stage
+		assertEquals(-9999, sut.get(0)); //value expected at front of list
+		assertEquals(0, sut.get(1));	 //value expected at index 1
+		assertEquals(2498, sut.get(2499));
+		assertEquals(5555, sut.get(2500));	//value expected at middle of list
+		assertEquals(2499, sut.get(2501));
+		assertEquals(4999, sut.get(5001));
+		assertEquals(9999, sut.get(5002));	//value expected at last entry of list
+		assertEquals(null, sut.get(5003));
+		assertEquals(5003, sut.getSize());
+		
+	} //end of should_add_item_to_middle_of_large_list
+	
+	@Test
+	void should_remove_first_item_from_list() {
+		
+	} //end of should_remove_first_item_from_list
 
 	@Test
-	void remove_item_from_middle_of_list() {
+	void should_remove_item_from_middle_of_list() {
 				
-	}
+	} //end of should_remove_item_from_middle_of_list
 	
 	@Test
-	void remove_last_item_from_list() {
+	void should_remove_last_item_from_list() {
 		
-	}
+	} //end of should_remove_last_item_from_list
 
 	
 } // end of CustomArrayListTest class

@@ -54,11 +54,8 @@ public class CustomArrayList<T> implements CustomList<T> {
 		}
 		
 		// 2c) invoke method to shift arrays elements to the right of index by 1.
-		for (int i = size-1; i > index; i--) {
+		for (int i = size-1; i >= index; i--) {
 			items[i+1] = items[i];
-		}
-		if (size == 1) {
-			items[1] = items[0];
 		}
 		items[index] = item;
 		
