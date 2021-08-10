@@ -50,6 +50,23 @@ class CustomArrayListTest {
 	} // end of should_add_11_itmes_to_list method
 	
 	@Test
+	void should_cause_out_of_bounds_error() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		
+		// Act stage
+//		sut.add(-5,100); //check - Exception thrown
+//		sut.add(1,100);	 //check - Exception thrown
+//		sut.add(10,100); //check - Exception thrown
+		sut.remove(0);
+//		sut.remove(5);	 //check - Exception thrown
+//		sut.remove(9);	 //check - Exception thrown
+		
+		// Assert stage
+		assertEquals(null, sut.remove(0));
+	} //end of should_cause_out_of_bounds_error
+	
+	@Test
 	void should_add_item_to_front_of_empty_list() {
 		// Arrange stage
 		CustomList<Integer> sut = new CustomArrayList<>();
@@ -176,18 +193,76 @@ class CustomArrayListTest {
 	} //end of should_add_item_to_middle_of_large_list
 	
 	@Test
-	void should_remove_first_item_from_list() {
+	void should_remove_item_from_empty_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
 		
+		// Act stage
+		Integer removedItem = sut.remove(0);
+		
+		// Assert stage
+		assertEquals(null, removedItem);
+		assertEquals(0, sut.getSize());
+	} //end of should_remove_item_from_empty_list
+	
+	@Test
+	void should_remove_first_item_from_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			sut.add(i, i*10);
+		}
+		assertEquals(0, sut.get(0));
+		assertEquals(90, sut.get(9));
+		assertEquals(10, sut.getSize());
+		
+		// Act stage
+		Integer removedItem = sut.remove(0);
+		
+		// Assert stage
+		assertEquals(0, removedItem);
+		assertEquals(10, sut.get(0));
+		assertEquals(90, sut.get(8));
+		assertEquals(null, sut.get(9));
+		assertEquals(9, sut.getSize());
 	} //end of should_remove_first_item_from_list
 
 	@Test
 	void should_remove_item_from_middle_of_list() {
-				
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			sut.add(i, i*10);
+		}
+		
+		// Act stage
+		Integer removedItem = sut.remove(5);
+		
+		// Assert stage
+		assertEquals(50, removedItem);
+		assertEquals(40, sut.get(4));
+		assertEquals(60, sut.get(5));
+		assertEquals(90, sut.get(8));
+		assertEquals(null, sut.get(9));
+		assertEquals(9, sut.getSize());
 	} //end of should_remove_item_from_middle_of_list
 	
 	@Test
 	void should_remove_last_item_from_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			sut.add(i, i*10);
+		}
 		
+		// Act stage
+		Integer removedItem = sut.remove(9);
+		
+		// Assert stage
+		assertEquals(90, removedItem);
+		assertEquals(80, sut.get(8));
+		assertEquals(null, sut.get(9));
+		assertEquals(9, sut.getSize());
 	} //end of should_remove_last_item_from_list
 
 	

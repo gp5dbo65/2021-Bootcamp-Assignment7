@@ -39,7 +39,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
 		// 1) compare index to current array to see if it is out of bounds
-		if (index > size) {
+		if (index > size || index < 0) {
 			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
 		}
 		 
@@ -66,20 +66,35 @@ public class CustomArrayList<T> implements CustomList<T> {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		/*
-		 * 1) compare index to current array size to see if it is out of bounds.
-		 *    yes - throw IndexOutOfBoundsException - terminate program
-		 * 2a) copy contents @ [index] into a temp variable
-		 * 2b) are we at the end? yes - set the last entry to NULL,
-		 * 		 return the contents of temp var
-		 * 2c) invoke method to shift array data to the left by 1.
-		 * 3) decrement array size by 1
-		 * 4) return item T stored in temp var  
-		 * */
-		return null;
+		// 1) compare index to current array to see if it is out of bounds
+		if (index > size || index < 0) {
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+		}
+		
+		// 1a) Is the array empty? yes - return null
+		if (size == 0) {
+			return null;
+		}
+		
+		// 2a) copy contents @ [index] into a temp variable
+		T removedItem = (T) items[index];
+		
+		/* 2b) are we at the end? yes - set the last entry to NULL,
+		 * 		 return the contents of temp var */
+		// 2c) invoke method to shift array data to the left by 1.
+		for (int i = index; i < size-1; i++) {
+			items[i] = items[i+1];
+		}
+		items[size-1] = null; //set the very last item stored in the array to null
+
+		// 3) decrement array size by 1
+		size--;
+		
+		// 4) return item T stored in temp var  
+		return removedItem;
 	}
 	
 } //end of CustomArrayList class
