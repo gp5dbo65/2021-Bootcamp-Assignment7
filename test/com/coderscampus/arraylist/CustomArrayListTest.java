@@ -49,6 +49,15 @@ class CustomArrayListTest {
 		assertEquals(11, sut.getSize());		
 	} // end of should_add_11_itmes_to_list method
 	
+	/********************************************************************
+	 * I've asked Trevor how do I go about testing for exceptions rather
+	 * than coding it to stop the test when the exception is thrown and 
+	 * then comment out the code so the rest of the unit test can run
+	 * to completion. So to test for an out of bounds exception, 
+	 * uncomment any one of the commented lines below to see if this unit
+	 * test fails. Then comment the code so the rest of the unit tests
+	 * can run to completion.
+	 *******************************************************************/
 	@Test
 	void should_cause_out_of_bounds_error() {
 		// Arrange stage
@@ -89,19 +98,6 @@ class CustomArrayListTest {
 		for(int i = 0; i < 11; i++) {
 			sut.add(i);
 		}
-		assertEquals(0, sut.get(0));
-		assertEquals(1, sut.get(1));
-		assertEquals(2, sut.get(2));
-		assertEquals(3, sut.get(3));
-		assertEquals(4, sut.get(4));
-		assertEquals(5, sut.get(5));
-		assertEquals(6, sut.get(6));
-		assertEquals(7, sut.get(7));
-		assertEquals(8, sut.get(8));
-		assertEquals(9, sut.get(9));
-		assertEquals(10, sut.get(10));
-		assertEquals(null, sut.get(11));
-		assertEquals(11, sut.getSize());
 		
 		// Act stage
 		sut.add(0, 100);
@@ -189,7 +185,6 @@ class CustomArrayListTest {
 		assertEquals(9999, sut.get(5002));	//value expected at last entry of list
 		assertEquals(null, sut.get(5003));
 		assertEquals(5003, sut.getSize());
-		
 	} //end of should_add_item_to_middle_of_large_list
 	
 	@Test
@@ -265,5 +260,36 @@ class CustomArrayListTest {
 		assertEquals(9, sut.getSize());
 	} //end of should_remove_last_item_from_list
 
+	@Test
+	void should_remove_items_from_large_list() {
+		// Arrange stage
+		CustomList<Integer> sut = new CustomArrayList<>();
+		for(int i = 0; i < 5000; i++) {
+			sut.add(i);
+		}
+		assertEquals(0, sut.get(0));
+		assertEquals(2500, sut.get(2500));
+		assertEquals(4999, sut.get(4999));
+		assertEquals(null, sut.get(5000));
+		assertEquals(5000, sut.getSize());
+		
+		// Act stage
+		Integer removeFirstItem = sut.remove(0);	//remove item from front of list
+		Integer removeMiddleItem = sut.remove(2500); //remove item from middle of list
+		Integer removeLastItem = sut.remove(4997);	//remove item from end of list
+		
+		// Assert stage
+		assertEquals(0, removeFirstItem); //value removed from front of list
+		assertEquals(1, sut.get(0));	 //value expected at index 0
+		assertEquals(2501, removeMiddleItem); //value removed from middle of list
+		assertEquals(2499, sut.get(2498));
+		assertEquals(2500, sut.get(2499));
+		assertEquals(2502, sut.get(2500));	//value expected at middle of list
+		assertEquals(2503, sut.get(2501));
+		assertEquals(4998, sut.get(4996));	//value expected at last entry of list
+		assertEquals(4999, removeLastItem);
+		assertEquals(null, sut.get(4997));
+		assertEquals(4997, sut.getSize());	//expected number of entries remaining in list
+	} //end of should_remove_items_from_large_list
 	
 } // end of CustomArrayListTest class

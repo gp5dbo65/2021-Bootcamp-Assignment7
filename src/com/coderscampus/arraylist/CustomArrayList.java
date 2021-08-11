@@ -66,6 +66,11 @@ public class CustomArrayList<T> implements CustomList<T> {
 		return true;
 	}
 
+	/********************************************************************
+	 * This method will allow the user to remove an item (index[0]) from 
+	 * an empty list by returning a null value. Therefore the user must be 
+	 * prepared to handle a null value.
+	 *******************************************************************/
 	@SuppressWarnings("unchecked")
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
@@ -82,13 +87,12 @@ public class CustomArrayList<T> implements CustomList<T> {
 		// 2a) copy contents @ [index] into a temp variable
 		T removedItem = (T) items[index];
 		
-		/* 2b) are we at the end? yes - set the last entry to NULL,
-		 * 		 return the contents of temp var */
-		// 2c) invoke method to shift array data to the left by 1.
+		// 2b) shift array data to the left by 1.
 		for (int i = index; i < size-1; i++) {
 			items[i] = items[i+1];
 		}
-		items[size-1] = null; //set the very last item stored in the array to null
+		// 2c) set the last entry to null
+		items[size-1] = null;
 
 		// 3) decrement array size by 1
 		size--;
